@@ -20,3 +20,7 @@ docker run -dit img:tag
 docker run -it img:tag bash
 
 
+## https://dba.stackexchange.com/questions/103625/how-to-reinitialise-var-lib-mysql-files
+mkdir /var/lib/mysql
+mkdir /var/lib/mysql/mysql
+chown -R mysql:mysql /var/lib/mysql 
