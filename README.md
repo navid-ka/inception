@@ -1,6 +1,10 @@
 Add to /etc/hosts local ip of docker 
 ip a | grep inet
 
+docker build -t name:tag
+
+docker inspect \
+  -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' IDCONTAINER
 docker ps 
 
 docker images 
