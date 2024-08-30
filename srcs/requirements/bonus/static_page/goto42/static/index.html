@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker GOTO42</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        main {
+            text-align: center;
+        }
+        </style>
+
+</head>
+<body>
+    <main>
+        <h1>Go42</h1>
+        <p>Made by nkeyani-</p>
+        <p>It is built using Go and HTML/CSS/JS</p>
+        <button id="42">Click me!</button>
+        <dialog>
+            'The answer to the ultimate question of life, the universe and everything is 42' <span style="font-size: 2em;">🚀</span>
+        </dialog>
+    </main>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('42').addEventListener('click', function() {
+            var dialog = document.querySelector('dialog');
+            dialog.showModal();
+            
+            dialog.addEventListener('click', function() {
+                dialog.close();
+            });
+        });
+    });
+    </script>
+</html>
