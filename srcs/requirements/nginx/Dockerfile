@@ -1,28 +1,15 @@
-#Get debian version
-FROM debian:bullseye
+FROM debian:11.9
 
-LABEL version="1.0"
-#download packets
-RUN apt update -y && \
-    apt install nginx openssl curl -y && \
-    mkdir /etc/nginx/ssl && \
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/nginx/ssl/nginx-private.key -out /etc/nginx/ssl/nginx-cert.crt -batch 
-#Copy local files to docker nginx path
-
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./nginx.sh /etc/nginx/nginx.sh
-
-RUN chmod +x /etc/nginx/nginx.sh
+RUN apt-get -y update && apt-get -y install nginx openssl
 
 EXPOSE 443
 
-STOPSIGNAL SIGQUIT
+COPY ./conf/default /etc/nginx/sites-enabled/default
+COPY ./tools/ssl.sh /var/www
 
-ENTRYPOINT ["./etc/nginx/nginx.sh"]
+RUN chmod 755 /var/www/ssl.sh
 
-#CMD ["nginx", "-g", "daemon off;"]
-#CMD ["nginx", "-g", "daemon off;"]
-# HACK tail -F 
 
-CMD ["tail", "-f", "/dev/null"]
+ENTRYPOINT [ "/var/www/ssl.sh" ]
+
+CMD ["nginx", "-g", "daemon off;"]
